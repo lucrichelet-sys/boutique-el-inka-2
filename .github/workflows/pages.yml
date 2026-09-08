@@ -36,3 +36,28 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+
+  smoke-test:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify deployed beta over HTTPS
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://lucrichelet-sys.github.io/boutique-el-inka-2/"
+          html=""
+          for attempt in {1..12}; do
+            if html="$(curl -fsSL --retry 2 "$url")"; then
+              break
+            fi
+            sleep 5
+          done
+          test -n "$html"
+          grep -Fq '<title>WOW Astro — Private Creator Beta</title>' <<< "$html"
+          grep -Fq 'noindex,nofollow,noarchive,nosnippet' <<< "$html"
+          curl -fsSL "$url/app.js" | grep -Fq "const HASH='c1939d444253d22a6eaefdeeccd7ada833180350a4341724dc8095fe760ac7e7'"
+          curl -fsSL "$url/styles.css" | grep -Fq -- '--purple:#70449e'
+          curl -fsSL "$url/privacy.html" | grep -Fq 'Privacy notice'
+          echo "LIVE_SMOKE_TEST=PASS"
+          echo "LIVE_URL=$url"
