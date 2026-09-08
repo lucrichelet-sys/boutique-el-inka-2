@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>WOW Astro — Private Creator Beta</title>
+  <meta name="description" content="Invite-only, no-data astrology product prototype.">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'">
+  <meta http-equiv="Permissions-Policy" content="camera=(),microphone=(),geolocation=(),payment=(),usb=()">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <section id="gate" class="gate">
+    <div class="gate-card">
+      <div class="logo">✦</div>
+      <p class="eyebrow">WOW Development · Controlled preview</p>
+      <h1>Private creator beta</h1>
+      <p>Enter the invitation code. Nothing typed into this prototype is transmitted or stored.</p>
+      <label for="code">Access code</label>
+      <div class="gate-row">
+        <input id="code" type="password" autocomplete="off" spellcheck="false">
+        <button id="unlock" class="primary">Open beta</button>
+      </div>
+      <p class="small">Lightweight front-end gate only. Do not enter sensitive information.</p>
+      <p id="gate-error" class="error" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <div id="app" hidden>
+    <header>
+      <a class="brand" href="#top"><span class="logo mini">✦</span><span><b>WOW ASTRO</b><small>private creator beta</small></span></a>
+      <nav><a href="#experience" data-t="experienceNav">Experience</a><a href="#feedback" data-t="feedbackNav">Feedback</a><a href="privacy.html" data-t="privacyNav">Privacy</a></nav>
+      <div class="langs"><button class="lang active" data-lang="en">EN</button><button class="lang" data-lang="es">ES</button></div>
+    </header>
+
+    <main>
+      <section id="top" class="hero">
+        <div>
+          <p class="eyebrow" data-t="heroEyebrow">Invite-only · No account · No payment</p>
+          <h1 data-t="heroTitle">Astrology made clearer, calmer and easier to explore.</h1>
+          <p class="lead" data-t="heroText">Test a short reflective experience built around one zodiac sign and one life focus. This evaluates the product experience—not a complete birth chart.</p>
+          <div class="pills"><span data-t="p1">No birth data</span><span data-t="p2">No cookies or analytics</span><span data-t="p3">No posting required</span></div>
+          <a class="primary button" href="#experience" data-t="start">Start the 5-minute test</a>
+        </div>
+        <div class="cosmos" aria-hidden="true"><div class="sun"></div><div class="orbit a"></div><div class="orbit b"></div><i>✦</i><i>✧</i></div>
+      </section>
+
+      <aside><b data-t="statusTitle">Prototype status:</b> <span data-t="status">Automated sample copy for product testing. It is not Sol Vartan's personal interpretation, not a complete birth chart and not a launched paid service.</span></aside>
+
+      <section id="experience" class="card">
+        <div class="heading"><div><p class="eyebrow" data-t="guided">Guided prototype</p><h2 data-t="build">Build a cosmic reflection</h2></div><span class="local" data-t="local">Runs locally in your browser</span></div>
+        <h3><em>1</em><span data-t="signTitle">Choose a zodiac sign</span></h3>
+        <p class="hint" data-t="signHelp">Use a sign you know well. No birth date is requested.</p>
+        <div id="signs" class="choices signs" role="radiogroup"></div>
+
+        <h3><em>2</em><span data-t="focusTitle">Choose a focus</span></h3>
+        <p class="hint" data-t="focusHelp">What should the reflection help explore?</p>
+        <div id="focuses" class="choices focuses" role="radiogroup"></div>
+
+        <div class="actions"><button id="generate" class="primary" disabled data-t="generate">Generate reflection</button><span id="ready" class="small" data-t="prompt">Choose one option in each step.</span></div>
+      </section>
+
+      <section id="result" class="result" hidden>
+        <div class="heading"><div><p class="eyebrow" data-t="generated">Prototype-generated sample</p><h2 data-t="yourReflection">Your reflection</h2></div><button id="reset" class="ghost light" data-t="reset">Try another combination</button></div>
+        <div id="tags" class="pills"></div>
+        <article>
+          <div class="symbol" id="symbol">✦</div>
+          <div><label data-t="usefulLabel">What may be useful</label><p id="useful"></p></div>
+          <div><label data-t="watchLabel">What to watch</label><p id="watch"></p></div>
+          <div><label data-t="questionLabel">A useful question</label><p id="question"></p></div>
+          <div class="action-box"><label data-t="actionLabel">One grounded action</label><p id="action"></p></div>
+        </article>
+        <p class="disclaimer" data-t="disclaimer">For reflection and entertainment. Not medical, legal, financial or professional advice. No outcome is guaranteed.</p>
+      </section>
+
+      <section id="feedback" class="card">
+        <div class="heading"><div><p class="eyebrow" data-t="feedbackEyebrow">Independent feedback</p><h2 data-t="feedbackTitle">Tell us what worked—and what failed.</h2></div><span class="local" data-t="nothingSent">Nothing is submitted</span></div>
+        <p data-t="feedbackText">Rate the experience and add concrete corrections. The page creates text you can copy into your reply.</p>
+        <div class="ratings">
+          <fieldset><legend data-t="clarity">Clarity</legend><div class="rating" data-rating="clarity"></div></fieldset>
+          <fieldset><legend data-t="relevance">Relevance</legend><div class="rating" data-rating="relevance"></div></fieldset>
+          <fieldset><legend data-t="trust">Trust</legend><div class="rating" data-rating="trust"></div></fieldset>
+          <fieldset><legend data-t="design">Visual design</legend><div class="rating" data-rating="design"></div></fieldset>
+        </div>
+        <label for="notes" data-t="notesLabel">Three concrete corrections or observations</label>
+        <textarea id="notes" rows="6" maxlength="1500" data-placeholder="notesPlaceholder" placeholder="What would you change first?"></textarea>
+        <div class="actions"><button id="prepare" class="primary" data-t="prepare">Prepare feedback</button><button id="copy" class="ghost" disabled data-t="copy">Copy feedback</button></div>
+        <textarea id="output" rows="10" readonly aria-label="Copyable feedback"></textarea>
+        <p id="copy-status" class="small" aria-live="polite"></p>
+      </section>
+
+      <section class="closing"><p class="eyebrow" data-t="thanks">Thank you for being direct</p><h2 data-t="criticism">A useful criticism is worth more than a polite compliment.</h2><p data-t="reply">Reply through the original invitation channel. No public post is expected.</p></section>
+    </main>
+
+    <footer><span>WOW Development · Private prototype v0.1</span><span>8 September 2026</span><a href="privacy.html" data-t="privacyNav">Privacy</a></footer>
+  </div>
+  <noscript>JavaScript is required for this prototype.</noscript>
+  <script src="app.js" defer></script>
+</body>
+</html>
